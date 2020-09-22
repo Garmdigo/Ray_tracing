@@ -1,4 +1,4 @@
-﻿// C++ include
+// C++ include
 #include <iostream>
 #include <string>
 #include <vector>
@@ -186,137 +186,6 @@ private:
 
 };
 
-//class Mesh
-//{
-//public :
-//	Mesh(const char *filename) : V(),F()
-//	{
-//		ifstream in;
-//		in.open(filename, ifstream::in);
-//		if (in.fail()) {
-//			cerr << "Failed to open " << filename << endl;
-//			return;
-//		}
-//		string line;
-//		while (!in.eof()) {
-//			getline(in, line);
-//			istringstream iss(line.c_str());
-//			char trash;
-//			if (!line.compare(0, 2, "v ")) {
-//				iss >> trash;
-//				Vector3i v;
-//				for (int i = 0; i < 3; i++) 
-//					iss >> v[i];
-//				V.push_back(v);
-//			}
-//			else if (!line.compare(0, 2, "3 ")) {
-//				Vector3d f;
-//				int idx, cnt = 0;
-//				iss >> trash;
-//				while (iss >> idx) {
-//					idx--; // in wavefront obj all indices start at 1, not zero
-//					f[cnt++] = idx;
-//				}
-//				if (3 == cnt) faces.push_back(f);
-//			}
-//		}
-//		std::cerr << "# v# " << verts.size() << " f# " << faces.size() << std::endl;
-//
-//		Vec3f min, max;
-//		get_bbox(min, max);
-//	}
-//
-//	int getVert() const
-//	{
-//		return (int)V.size();
-//	}
-//	int getFaces() const
-//	{
-//		return (int)F.size();
-//	}
-//
-//	bool ray_triangle_intersect(const int &fi, const Vector3d &orig, const Vector3d &dir, float &tnear)
-//	{
-//		//Vector3f edge1 = point(V(fi, 1,0)) - point(V(fi, 0));
-//		//Vector3f edge2 = point(V(fi, 2)) - point(V(fi, 0));
-//		//
-//		//Vector3d pvec = dir.cross(edge2); 
-//		//float det = edge1 * pvec;
-//		//if (det < 1e-5) return false;
-//
-//		//Vector3d tvec = orig - point(vert(fi, 0));
-//		//float u = tvec * pvec;
-//		//if (u < 0 || u > det) return false;
-//
-//		//Vector3d qvec = tvec.cross(edge1);
-//		//float v = dir * qvec;
-//		//if (v < 0 || u + v > det) return false;
-//
-//		//tnear = edge2 * qvec * (1. / det);
-//		//return tnear > 1e-5;
-//	}
-//	const Vector3f &point(int b) const
-//	{
-//		bool eq1 = b >= 0;
-//		bool eq2 = b < getVert();
-//		assert(eq1 && eq2);
-//		return V[b];
-//	}
-//	Vector3f &point(int b)
-//	{
-//		bool eq1 = b >= 0;
-//		bool eq2 = b < getVert();
-//		assert(eq1 && eq2);
-//		return V[b];
-//	} 
-//	// coordinates of the vertex i
-//	int vert(int Triangle, int index) const
-//	{
-//		auto eq1 = Triangle >= 0;
-//		auto eq2 = Triangle < getFaces();
-//		auto eq3 = index >= 0;
-//		auto eq4 = index < 3;
-//
-//		assert(eq1&& eq2 && eq3 && eq4);
-//		return F[Triangle][index];
-//	}
-//	// index of the vertex for the triangle fi and local index li
-//	void get_bbox(Vector3f  & minimun, Vector3f &maximum) {
-//		minimun = V[0];
-//		maximum = V[0];
-//		for (int i = 1; i < getVert(); ++i) {
-//			for (int j = 0; j < 3; j++) {
-//				auto eq1 = minimun[j];
-//				auto eq2 = V[i][j];
-//				auto eq3 = maximum[j];
-//				minimun[j] = min(eq1, eq2);
-//				maximum[j] = max(eq3, eq2);
-//			}
-//		}
-//		std::cerr << "bbox: [" << minimun << " : " << maximum << "]" << endl;
-//	}
-//	// bounding box for all the vertices, including isolated ones
-//private :
-//	vector<Vector3f> V;
-//	vector <Vector3i> F;
-//	string F;
-//};
-//
-//
-////std::ostream& operator<<(std::ostream& out, Mesh &m)
-////{
-////	for (int i = 0; i < m.getVert(); i++) {
-////		out << "v " << m.point(i) << endl;
-////	}
-////	for (int i = 0; i < m.getFaces(); i++) {
-////		out << "f ";
-////		for (int k = 0; k < 3; k++) {
-////			out << (m.vert(i, k) + 1) << " ";
-////		}
-////		out << endl;
-////	}
-////	return out;
-////}
 
 class Illumination
 {
@@ -490,22 +359,7 @@ bool SphereIntersect(Ray & ray, Vector3d &hit, Vector3d &N, vector<Sphere> &S, D
 		Des = S[minI].getDescription();
 
 	}
- //   double Plane = numeric_limits<double>::infinity();
-	//auto dirY = R.getDirection().y();
-	//auto Origin = R.getOrigin().y();
 
-	////if (fabs(dirY) > 0)
-	//{
-	//	float Distance = -(Origin + 4) / dirY;
-	//	Vector3d P = R.getOrigin() + R.getDirection() * Distance;
-	//	if (Distance > 0 && fabs(P.x()) < 10 && P.z() < -10 && P.z() > -30 && Distance < minT)
-	//	{
-	//		Plane = Distance;
-	//		hit = P;
-	//		N = Vector3d(0, 1, 0);
-	//		auto b = Reflection(N, hit);
-	//	}
-	//}
 	return true;
 }
 
